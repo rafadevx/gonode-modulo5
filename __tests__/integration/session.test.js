@@ -70,8 +70,16 @@ describe("Authentication", () => {
     expect(response.status).toBe(200);
   });
 
-  it("shoud not be able to acces private routes when not authenticated", async () => {
+  it("shoud not be able to access private routes when not authenticated", async () => {
     const response = await request(app).get("/dashboard");
+
+    expect(response.status).toBe(401);
+  });
+
+  it("shoud not be able to access private routes when not authenticated", async () => {
+    const response = await request(app)
+      .get("/dashboard")
+      .set("Authorization", "Bares 123123");
 
     expect(response.status).toBe(401);
   });
